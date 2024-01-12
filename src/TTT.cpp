@@ -5,6 +5,11 @@
 #include "win_check_functions.hpp"
 #include "macros.hpp"
 
+TicTacToeSquare turnSwitch(TicTacToeSquare tile)
+{
+	return tile == TTTS_O ? TTTS_X : TTTS_O;
+}
+
 char TTTSToChar(TicTacToeSquare square)
 {
 	switch (square) {
@@ -19,20 +24,12 @@ char TTTSToChar(TicTacToeSquare square)
 	}
 }
 
-TicTacToeSquare turnSwitch(TicTacToeSquare tile)
-{
-	return tile == TTTS_O ? TTTS_X : TTTS_O;
-}
-
 void boardDisp(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board)
 {
-	for (const auto& arow : board)   // get each array row
-	{
-		for (const auto& e : arow) { // get each element of the row
-				std::cout << ' ' << TTTSToChar(e) << ' ' << '|';
-		}
-			std::cout << "\n---+---+---\n";
-
+	for (const auto& arow : board) {   // get each array row
+		for (const auto& e : arow)	 // get each element of the row
+			std::cout << ' ' << TTTSToChar(e) << ' ' << '|';
+		std::cout << "\n---+---+---\n";
 	}
 }
 
@@ -66,23 +63,18 @@ void boardWriting(std::array<std::array<TicTacToeSquare, numRows>, numCols>& boa
 
 bool gameStatus(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile, int pos)
 {
-	if (check_v(board, tile, pos))
+	// If any line is filled
+	if (check_v(board, tile, pos) || check_h(board, tile, pos) || check_dd(board, tile) || check_ud(board, tile)) {
+		std::cout << TTTSToChar(tile) << " Won!\n"; // That player won
 		return false;
-	else if (check_h(board, tile, pos))
-		return false;
-	else if (check_dd(board, tile))
-		return false;
-	else if (check_ud(board, tile))
-		return false;
-
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (board[i][j] == TTTS_BLANK) {
-				return true;
-			}
-		}
 	}
-
+			
+	// Draw checking
+	for (const auto& arow : board)   // get each array row
+		for (const auto& e : arow) // get each element of the row
+			if (e == TTTS_BLANK)
+				return true;
+			
 	std::cout << "Draw" << '\n';
 	return false;
 }
