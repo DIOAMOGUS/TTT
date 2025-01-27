@@ -13,7 +13,7 @@ enum TicTacToeSquare {
 TicTacToeSquare turnSwitch(TicTacToeSquare tile);
 
 // Converting enum to string
-char TTTStoChar(TicTacToeSquare square);
+char TTTStoChar(TicTacToeSquare tile);
 
 // Displays the board progress
 void boardDisp(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board);
@@ -28,4 +28,4 @@ bool posValidation(int pos, std::array<std::array<TicTacToeSquare, numRows>, num
 void boardWriting(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, int pos, TicTacToeSquare tile);
 
 // Groups win-checking functions
-bool gameStatus(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile, int pos);
+bool gameStatus(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, int pos, TicTacToeSquare tile);

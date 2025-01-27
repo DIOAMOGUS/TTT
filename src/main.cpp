@@ -6,7 +6,7 @@
 #ifdef DEBUG
 void* operator new(size_t size)
 {
-    std::cout << "Allocating "<< size << " bytes\n";
+    std::cout << "Allocating " << size << " bytes\n";
     return malloc(size);
 }
 
@@ -38,7 +38,7 @@ int main()
 
         std::cout << '\n';
 
-        status = gameStatus(board, tile, pos);
+        status = gameStatus(board, pos, tile);
 
         tile = turnSwitch(tile);
     }

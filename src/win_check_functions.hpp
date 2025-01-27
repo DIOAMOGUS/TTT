@@ -4,10 +4,10 @@
 
 // Win checking functions 
 // Checks for possible win in said column
-bool check_v(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile, int pos);
+bool check_v(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, int pos, TicTacToeSquare tile);
 
 // Checks for possible win in said line
-bool check_h(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile, int pos);
+bool check_h(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, int pos, TicTacToeSquare tile);
 
 // Checks for possible win in downwards diagonal
 bool check_dd(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile);
