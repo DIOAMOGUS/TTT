@@ -10,9 +10,9 @@ TicTacToeSquare turnSwitch(TicTacToeSquare tile)
 	return tile == TTTS_O ? TTTS_X : TTTS_O;
 }
 
-char TTTSToChar(TicTacToeSquare square)
+char TTTSToChar(TicTacToeSquare tile)
 {
-	switch (square) {
+	switch (tile) {
 	case TTTS_BLANK:
 		return ' ';
 	case TTTS_O:
@@ -61,16 +61,17 @@ void boardWriting(std::array<std::array<TicTacToeSquare, numRows>, numCols>& boa
 	board[pos / 3][pos % 3] = tile;
 }
 
-bool gameStatus(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, TicTacToeSquare tile, int pos)
+bool gameStatus(std::array<std::array<TicTacToeSquare, numRows>, numCols>& board, int pos, TicTacToeSquare tile)
 {
-	// If any line is filled
-	if (check_v(board, tile, pos) || check_h(board, tile, pos) || check_dd(board, tile) || check_ud(board, tile)) {
-		std::cout << TTTSToChar(tile) << " Won!\n"; // That player won
+	// Win condition
+	// fuck i hate this
+	if (check_v(board, pos, tile) || check_h(board, pos, tile) || check_dd(board, tile) || check_ud(board, tile)) {
+		std::cout << TTTSToChar(tile) << " Won!\n";
 		return false;
 	}
 			
 	// Draw checking
-	for (const auto& arow : board)   // get each array row
+	for (const auto& arow : board) // get each array row
 		for (const auto& e : arow) // get each element of the row
 			if (e == TTTS_BLANK)
 				return true;
